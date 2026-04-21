@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+
 public class Main {
 
     static StudentManager manager = new StudentManager();
@@ -26,10 +27,17 @@ public class Main {
                 case 4 -> updateStudent();
                 case 5 -> deleteStudent();
                 case 6 -> viewStats();
-                case 7 -> { System.out.println("👋 Goodbye!"); return; }
+                case 7 -> loadCSV();
+                case 8 -> { System.out.println("👋 Goodbye!"); return; }
                 default -> System.out.println("❌ Invalid choice. Try again.");
             }
         }
+    }
+    static void loadCSV() {
+        System.out.print("Enter CSV file path: ");
+        String path = sc.nextLine();
+
+        manager.loadFromCSV(path);
     }
 
     // ─── MENU ─────────────────────────────────────────────────
@@ -43,7 +51,8 @@ public class Main {
         System.out.println("│  4. Update Student          │");
         System.out.println("│  5. Delete Student          │");
         System.out.println("│  6. View Statistics         │");
-        System.out.println("│  7. Exit                    │");
+        System.out.println("│  7. Load from CSV           │");
+        System.out.println("│  8. exit                    │");
         System.out.println("└─────────────────────────────┘");
     }
 
@@ -56,8 +65,11 @@ public class Main {
             System.out.print("Branch : "); String branch = sc.nextLine();
             double cgpa = readDouble("CGPA   : ");
 
-            Student s = manager.addStudent(name, age, branch, cgpa);
-            System.out.println("✅ Student added! ID = " + s.getId());
+            manager.addStudent(name, age, branch, cgpa);
+
+            System.out.println("✅ Student added successfully!");
+            System.out.println("👉 ID is auto-generated in database");
+
         } catch (IllegalArgumentException e) {
             System.out.println("❌ Error: " + e.getMessage());
         }
