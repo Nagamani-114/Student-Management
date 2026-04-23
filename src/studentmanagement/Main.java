@@ -63,7 +63,7 @@ public class Main {
             System.out.print("Name   : "); String name = sc.nextLine();
             int age = readInt("Age    : ");
             System.out.print("Branch : "); String branch = sc.nextLine();
-            double cgpa = readDouble("CGPA   : ");
+            double cgpa = readDouble();
 
             manager.addStudent(name, age, branch, cgpa);
 
@@ -167,18 +167,17 @@ public class Main {
         while (true) {
             try {
                 System.out.print(prompt);
-                int val = Integer.parseInt(sc.nextLine().trim());
-                return val;
+                return Integer.parseInt(sc.nextLine().trim());
             } catch (NumberFormatException e) {
                 System.out.println("⚠️  Please enter a valid number.");
             }
         }
     }
 
-    static double readDouble(String prompt) {
+    static double readDouble() {
         while (true) {
             try {
-                System.out.print(prompt);
+                System.out.print("CGPA   : ");
                 return Double.parseDouble(sc.nextLine().trim());
             } catch (NumberFormatException e) {
                 System.out.println("⚠️  Please enter a valid decimal number.");
